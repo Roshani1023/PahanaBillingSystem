@@ -104,10 +104,25 @@
     <body>
         <jsp:include page="navbar.jsp" />
 
+
         <div class="page-content">
+
 
             <form class="form-container" action="AddCustomerServlet" method="post">
                 <h2>Add New Customer</h2>
+                <%
+                    String success = request.getParameter("success");
+                    String error = request.getParameter("error");
+                %>
+                <% if (success != null) {%>
+                <div style="background-color: rgba(144,238,144,0.2); border-left: 4px solid green; color: green; padding: 10px 20px; margin: 15px auto; width: 90%; border-radius: 10px; font-weight: bold;">
+                    <%= success%>
+                </div>
+                <% } else if (error != null) {%>
+                <div style="background-color: rgba(255,182,193,0.2); border-left: 4px solid #fa8072; color: #fa8072; padding: 10px 20px; margin: 15px auto; width: 90%; border-radius: 10px; font-weight: bold;">
+                    <%= error%>
+                </div>
+                <% }%>
 
                 <div class="form-group">
                     <input type="text" name="name" required placeholder=" " />
