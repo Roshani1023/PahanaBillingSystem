@@ -247,7 +247,12 @@
         <!-- About Section -->
         <div class="about-box">
             <p>
-                The <strong>Pahana Edu Billing System</strong> is a powerful and easy-to-use web application built to streamline billing and customer management for educational institutes, tuition centers, and coaching classes. Our system enables admins to manage customers, items, and generate accurate bills with ease. Designed with a beautiful user interface and animated feedback, the dashboard gives quick insights and access to the most essential features. Whether you're printing bills or managing reports, Pahana Edu brings you a simplified workflow with style.
+                <strong>Pahana Educational Book Shop</strong> 
+                is a well-established store dedicated to providing a wide range of high-quality educational books, stationery, and school supplies. Located at the heart of the local community, Pahana is the go-to destination for students, teachers, and parents who value excellence in learning. 
+                From preschool activity books to advanced academic texts, we cater to learners of all levels. 
+                Our friendly staff, organized layout, and affordable prices make the shopping experience smooth and satisfying. 
+                At Pahana, we believe that every great future begins with the right book in hand.
+
             </p>
         </div>
 
