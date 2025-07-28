@@ -98,13 +98,23 @@
             <ul>
                 <li><a href="dashboard.jsp">Dashboard</a></li>
                 <li>
-                    <a href="#">Manage</a>
+                    <a href="#">Customer</a>
                     <ul>
                         <li><a href="add_customer.jsp">Add Customer</a></li>
-                        <li><a href="add_item.jsp">Add Item</a></li>
-                        <li><a href="generate_bill.jsp">Generate Bill</a></li>
+                        <li><a href="view_customers.jsp">View Customers</a></li>
+                        
                     </ul>
                 </li>
+                <li>
+                    <a href="#">Items</a>
+                    <ul>
+                        
+                        <li><a href="add_item.jsp">Add Item</a></li>
+                        <li><a href="view_items.jsp">View Items</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="generate_bill.jsp">Generate Bill</a></li>
                 <li><a href="view_reports.jsp">Reports</a></li>
                 <li><a href="help.jsp">Help</a></li>
                 <li><a href="logout.jsp">Logout</a></li>
