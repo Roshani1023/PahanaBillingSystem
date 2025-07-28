@@ -116,6 +116,7 @@
             .hero h1 {
                 font-size: 36px;
                 color: #000;
+                font-family: Times New Roman;
             }
 
             .typewriter {
@@ -212,7 +213,7 @@
 
             // Start counting when page loads
             window.onload = () => {
-                animateCount("customers", 142); // update this with real value later
+                animateCount("customers", 142);
                 animateCount("items", 56);
                 animateCount("bills", 87);
             };
@@ -248,7 +249,7 @@
         <div class="about-box">
             <p>
                 <strong>Pahana Educational Book Shop</strong> 
-                is a well-established store dedicated to providing a wide range of high-quality educational books, stationery, and school supplies. Located at the heart of the local community, Pahana is the go-to destination for students, teachers, and parents who value excellence in learning. 
+                is a well-established store dedicated to providing a wide range of high quality educational books, stationery, and school supplies. Located at the heart of the local community, Pahana is the go to destination for students, teachers, and parents who value excellence in learning. 
                 From preschool activity books to advanced academic texts, we cater to learners of all levels. 
                 Our friendly staff, organized layout, and affordable prices make the shopping experience smooth and satisfying. 
                 At Pahana, we believe that every great future begins with the right book in hand.
