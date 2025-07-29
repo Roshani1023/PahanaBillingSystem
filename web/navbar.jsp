@@ -101,7 +101,7 @@
                     <a href="#">Customer</a>
                     <ul>
                         <li><a href="add_customer.jsp">Add Customer</a></li>
-                        <li><a href="view_customers.jsp">View Customers</a></li>
+                        <li><a href="view_customers.jsp">Manage Customers</a></li>
                         
                     </ul>
                 </li>
@@ -110,7 +110,7 @@
                     <ul>
                         
                         <li><a href="add_item.jsp">Add Item</a></li>
-                        <li><a href="view_items.jsp">View Items</a></li>
+                        <li><a href="view_items.jsp">Manage Items</a></li>
                         
                     </ul>
                 </li>
