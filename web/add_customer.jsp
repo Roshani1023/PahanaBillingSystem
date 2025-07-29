@@ -99,6 +99,27 @@
             .form-container button:hover {
                 background-color: #e69500;
             }
+            
+            .message-box {
+                margin-bottom: 20px;
+                padding: 12px 18px;
+                border-radius: 10px;
+                font-weight: bold;
+                text-align: center;
+                animation: fadeIn 0.3s ease-in-out;
+            }
+
+            .success-box {
+                background-color: rgba(144,238,144,0.2);
+                border-left: 4px solid green;
+                color: green;
+            }
+
+            .error-box {
+                background-color: rgba(255,182,193,0.2);
+                border-left: 4px solid #fa8072;
+                color: #fa8072;
+            }
         </style>
     </head>
     <body>
@@ -114,14 +135,11 @@
                     String success = request.getParameter("success");
                     String error = request.getParameter("error");
                 %>
+
                 <% if (success != null) {%>
-                <div style="background-color: rgba(144,238,144,0.2); border-left: 4px solid green; color: green; padding: 10px 20px; margin: 15px auto; width: 90%; border-radius: 10px; font-weight: bold;">
-                    <%= success%>
-                </div>
+                <div class="message-box success-box"><%= success%></div>
                 <% } else if (error != null) {%>
-                <div style="background-color: rgba(255,182,193,0.2); border-left: 4px solid #fa8072; color: #fa8072; padding: 10px 20px; margin: 15px auto; width: 90%; border-radius: 10px; font-weight: bold;">
-                    <%= error%>
-                </div>
+                <div class="message-box error-box"><%= error%></div>
                 <% }%>
 
                 <div class="form-group">
@@ -147,6 +165,12 @@
                 <button type="submit">Save Customer</button>
             </form>
         </div>
+        <script>
+            // Automatically hide success/error messages after 5 seconds
+            setTimeout(() => {
+                document.querySelectorAll(".message-box").forEach(div => div.style.display = 'none');
+            }, 5000);
+        </script>
 
     </body>
 
