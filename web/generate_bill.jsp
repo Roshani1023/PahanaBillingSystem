@@ -247,7 +247,7 @@
                     const del = document.createElement("span");
                     del.innerHTML = "🗑";
                     del.style.cursor = "pointer";
-                    del.style.color="red";
+                    del.style.color = "red";
                     del.onclick = () => {
                         cart.splice(index, 1);
                         renderCart();
@@ -276,9 +276,45 @@
             }
 
             function generateInvoice() {
-                alert("Invoice generated!");
-                console.log(cart);
-                }
+                const customerName = document.getElementById("customerName").value.trim();
+                const customerContact = document.getElementById("customerContact").value.trim();
+                const paymentMethod = document.getElementById("paymentMethod").value;
+                const paid = parseFloat(document.getElementById("payingAmount").value);
+                const total = parseFloat(document.getElementById("total").innerText);
+
+                if (!customerName || !customerContact || isNaN(paid)) {
+                    alert("Please fill all required fields.");
+                    return;
+                }
+
+                const data = {
+                    customerName,
+                    customerContact,
+                    paymentMethod,
+                    paidAmount: paid,
+                    balance: paid - total,
+                    totalAmount: total,
+                    cartItems: cart
+                };
+
+                fetch('save_bill.jsp', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.status === "success") {
+                                window.location.href = data.redirect;
+                            } else {
+                                alert("Error occurred. Please try again.");
+                            }
+                        });
+
+            }
+
         </script>
 
     </body>
