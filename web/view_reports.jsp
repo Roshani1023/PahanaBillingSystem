@@ -59,6 +59,7 @@
 
         <jsp:include page="navbar.jsp" />
 
+        <!--Monthly invoice-->
         <div class="report-container">
             <h2>Invoice Report</h2>
 
@@ -120,6 +121,69 @@
                 %>
             </table>
         </div>
+        <!-- CHARTS SECTION -->
+        <div style="display: flex; justify-content: space-between; margin-top: 40px; gap: 20px;">
+            <!-- Bar Chart -->
+            <div style="flex: 1; background: #fff; padding: 20px; border-radius: 12px;">
+                <h3>Category-wise Sales</h3>
+                <canvas id="barChart" width="100%" height="80"></canvas>
+            </div>
+
+            <!-- Pie Chart -->
+            <div style="flex: 1; background: #fff; padding: 20px; border-radius: 12px;">
+                <h3>Sales Summary (This Month)</h3>
+                <canvas id="pieChart" width="100%" style="max-height: 500px;"></canvas>
+            </div>
+        </div>
+
+        <!-- Chart.js CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+            // Fetch chart data from backend
+            fetch('get_report_data.jsp<%= request.getParameter("month") != null ? "?month=" + request.getParameter("month") : ""%>')
+                    .then(res => res.json())
+                    .then(data => {
+                        // Bar Chart
+                        new Chart(document.getElementById("barChart"), {
+                            type: 'bar',
+                            data: {
+                                labels: data.categoryLabels,
+                                datasets: [{
+                                        label: 'Sales (LKR)',
+                                        backgroundColor: '#ffaa00',
+                                        data: data.categorySales
+                                    }]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: {display: false},
+                                    title: {display: true, text: 'Category-wise Sales'}
+                                }
+                            }
+                        });
+
+                        // Pie Chart
+                        new Chart(document.getElementById("pieChart"), {
+                            type: 'pie',
+                            data: {
+                                labels: ['Total Sales', 'Total Paid', 'Total Balance'],
+                                datasets: [{
+                                        backgroundColor: ['#4CAF50', '#2196F3', '#f44336'],
+                                        data: [data.totalSales, data.totalPaid, data.totalBalance]
+                                    }]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    title: {display: true, text: 'Sales Summary'}
+                                }
+                            }
+                        });
+                    });
+        </script>
+
 
     </body>
 </html>
