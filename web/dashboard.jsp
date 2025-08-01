@@ -238,7 +238,7 @@
                 </li>
                 <li><a href="view_reports.jsp">Reports</a></li>
                 <li><a href="help.jsp">Help</a></li>
-                <li><a href="logout.jsp">Logout</a></li>
+                <li><a href="#" onclick="confirmLogout()">Logout</a></li>
             </ul>
         </div>
 
@@ -296,11 +296,31 @@
             }
 
             window.onload = () => {
-                animateCount("customers", <%= customerCount%>);
-                animateCount("items", <%= itemCount%>);
-                animateCount("bills", <%= billCount%>);
-            };
+                    animateCount("customers", <%= customerCount%>);
+                    animateCount("items", <%= itemCount%>);
+                    animateCount("bills", <%= billCount%>);
+                };
         </script>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+        function confirmLogout() {
+                        Swal.fire({
+                                title: 'Logout Confirmation',
+                                text: "Are you sure you want to logout?",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#ffaa00',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, logout',
+                                cancelButtonText: 'Cancel'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                                    window.location.href = 'logout.jsp';
+                }
+                });
+                }
+                
+                
+                </script>
     </body>
 </html>

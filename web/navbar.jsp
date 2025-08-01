@@ -102,23 +102,44 @@
                     <ul>
                         <li><a href="add_customer.jsp">Add Customer</a></li>
                         <li><a href="view_customers.jsp">Manage Customers</a></li>
-                        
+
                     </ul>
                 </li>
                 <li>
                     <a href="#">Items</a>
                     <ul>
-                        
+
                         <li><a href="add_item.jsp">Add Item</a></li>
                         <li><a href="view_items.jsp">Manage Items</a></li>
-                        
+
                     </ul>
                 </li>
                 <li><a href="generate_bill.jsp">Generate Bill</a></li>
                 <li><a href="view_reports.jsp">Reports</a></li>
                 <li><a href="help.jsp">Help</a></li>
-                <li><a href="logout.jsp">Logout</a></li>
+                <li><a href="#" onclick="confirmLogout()">Logout</a></li>
             </ul>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+                    function confirmLogout() {
+                        Swal.fire({
+                            title: 'Logout Confirmation',
+                            text: "Are you sure you want to logout?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#ffaa00',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, logout',
+                            cancelButtonText: 'Cancel'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'logout.jsp';
+                            }
+                        });
+                    }
+
+
+        </script>
     </body>
 </html>

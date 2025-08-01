@@ -89,11 +89,20 @@
         </style>
     </head>
     <body>
+        <%
+            String logout = request.getParameter("logout");
+            if ("success".equals(logout)) {
+        %>
+        <div style="background-color: #d4edda; color: #155724; padding: 10px; border-left: 5px solid green; margin: 20px; border-radius: 8px;">
+            You have been logged out successfully.
+        </div>
+        <%
+            }
+        %>
 
         <div class="login-box">
             <h2>Login</h2>
             <%
-
                 String error = null;
                 if (session != null) {
                     error = (String) session.getAttribute("error");
