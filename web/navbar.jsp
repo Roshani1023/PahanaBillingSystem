@@ -1,8 +1,4 @@
-<%-- 
-    Document   : navbar
-    Created on : Jul 28, 2025, 6:13:59 AM
-    Author     : SHIMAR IMROOS
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

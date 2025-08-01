@@ -1,8 +1,3 @@
-<%-- 
-    Document   : add_customer
-    Created on : Jul 28, 2025, 6:08:55 AM
-    Author     : SHIMAR IMROOS
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
