@@ -1,23 +1,48 @@
-<%-- 
-    Document   : dashboard
-    Created on : Jul 28, 2025, 5:43:10 AM
-    Author     : SHIMAR IMROOS
---%>
-<%@ page import="java.util.*" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"  language="java"%>
+<%@ page import="java.sql.*" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String username = (String) session.getAttribute("username");
     if (username == null) {
         response.sendRedirect("login.jsp");
         return;
     }
+
+    // Fetch counts from the database
+    int customerCount = 0;
+    int itemCount = 0;
+    int billCount = 0;
+
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pahana_billing", "root", "");
+
+        Statement st = conn.createStatement();
+
+        ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM customers");
+        if (rs.next()) {
+            customerCount = rs.getInt(1);
+        }
+        rs = st.executeQuery("SELECT COUNT(*) FROM items");
+        if (rs.next()) {
+            itemCount = rs.getInt(1);
+        }
+        rs = st.executeQuery("SELECT COUNT(*) FROM bills");
+        if (rs.next()) {
+            billCount = rs.getInt(1);
+        }
+
+        rs.close();
+        conn.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dashboard | Pahana Edu Billing</title>
+        <meta charset="UTF-8">
         <style>
             body {
                 margin: 0;
@@ -67,7 +92,6 @@
                 color: #000;
             }
 
-            /* Dropdown */
             .navbar ul li ul {
                 display: none;
                 position: absolute;
@@ -94,9 +118,7 @@
             .navbar ul li ul li a {
                 display: block;
                 color: #fff;
-                text-decoration: none;
                 padding: 8px 12px;
-                transition: 0.3s;
             }
 
             .navbar ul li ul li a:hover {
@@ -105,18 +127,16 @@
                 border-radius: 5px;
             }
 
-
-            /* Hero Section */
+            /* Hero */
             .hero {
                 text-align: center;
-                padding: 80px 20px 20px 20px;
-                background-color: #fff;
+                padding: 80px 20px 20px;
             }
 
             .hero h1 {
                 font-size: 36px;
                 color: #000;
-                font-family: Times New Roman;
+                font-family: 'Times New Roman';
             }
 
             .typewriter {
@@ -138,8 +158,7 @@
                 50% { border-color: transparent; }
             }
 
-            /* About Paragraph */
-
+            /* About Section */
             .about-box {
                 max-width: 800px;
                 margin: 30px auto;
@@ -153,13 +172,12 @@
                 animation: fadeIn 2s ease-in-out;
             }
 
-
             @keyframes fadeIn {
                 from { opacity: 0; transform: translateY(20px); }
                 to { opacity: 1; transform: translateY(0); }
             }
 
-            /* Stats Section */
+            /* Stats */
             .stats {
                 display: flex;
                 justify-content: center;
@@ -170,6 +188,16 @@
 
             .stat-box {
                 text-align: center;
+                background: #fff8e1;
+                padding: 20px 30px;
+                border-radius: 12px;
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+                transition: 0.3s;
+            }
+
+            .stat-box:hover {
+                transform: scale(1.05);
+                background-color: #fff1c1;
             }
 
             .stat-number {
@@ -189,35 +217,9 @@
                 padding: 30px;
                 color: #aaa;
                 background-color: #f4f4f4;
+                margin-top: 50px;
             }
         </style>
-
-        <script>
-            // Animated Counter
-            function animateCount(id, target) {
-                let count = 0;
-                const speed = 20;
-                const increment = Math.ceil(target / 100);
-                const counter = document.getElementById(id);
-
-                const update = () => {
-                    count += increment;
-                    if (count >= target) {
-                        count = target;
-                        clearInterval(timer);
-                    }
-                    counter.textContent = count;
-                };
-                const timer = setInterval(update, speed);
-            }
-
-            // Start counting when page loads
-            window.onload = () => {
-                animateCount("customers", 142);
-                animateCount("items", 56);
-                animateCount("bills", 87);
-            };
-        </script>
     </head>
     <body>
 
@@ -240,24 +242,22 @@
             </ul>
         </div>
 
-        <!-- Hero Section -->
+        <!-- Hero -->
         <div class="hero">
-            <h1 class="typewriter">Welcome, <%= username%>.Have a nice day!!</h1>
+            <h1 class="typewriter">Welcome, <%= username%>. Have a nice day!</h1>
         </div>
 
-        <!-- About Section -->
+        <!-- About -->
         <div class="about-box">
             <p>
-                <strong>Pahana Educational Book Shop</strong> 
-                is a well-established store dedicated to providing a wide range of high quality educational books, stationery, and school supplies. Located at the heart of the local community, Pahana is the go to destination for students, teachers, and parents who value excellence in learning. 
+                <strong>Pahana Educational Book Shop</strong> is a well-established store dedicated to providing a wide range of high-quality educational books, stationery, and school supplies. 
                 From preschool activity books to advanced academic texts, we cater to learners of all levels. 
                 Our friendly staff, organized layout, and affordable prices make the shopping experience smooth and satisfying. 
                 At Pahana, we believe that every great future begins with the right book in hand.
-
             </p>
         </div>
 
-        <!-- Stats Section -->
+        <!-- Stats -->
         <div class="stats">
             <div class="stat-box">
                 <div id="customers" class="stat-number">0</div>
@@ -277,6 +277,30 @@
         <div class="footer">
             &copy; 2025 Pahana Edu Billing System. All rights reserved.
         </div>
+
+        <!-- Count Animation Script -->
+        <script>
+            function animateCount(id, target) {
+                let count = 0;
+                const speed = 20;
+                const increment = Math.ceil(target / 100);
+                const el = document.getElementById(id);
+                const timer = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        count = target;
+                        clearInterval(timer);
+                    }
+                    el.textContent = count;
+                }, speed);
+            }
+
+            window.onload = () => {
+                animateCount("customers", <%= customerCount%>);
+                animateCount("items", <%= itemCount%>);
+                animateCount("bills", <%= billCount%>);
+            };
+        </script>
 
     </body>
 </html>
