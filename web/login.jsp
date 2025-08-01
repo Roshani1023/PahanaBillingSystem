@@ -1,8 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : Jul 28, 2025, 5:33:29 AM
-    Author     : SHIMAR IMROOS
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
